@@ -1,115 +1,114 @@
 import React from 'react';
-import { MapPin, Phone, Mail, GraduationCap, Cpu, Layers, ShieldCheck, Palette } from 'lucide-react';
+import { Download, Sparkles, Star, Award, CheckCircle2 } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 
 export default function About() {
   return (
-    <section id="about" className="py-24 px-6 max-w-6xl mx-auto z-10 relative">
-      {/* Section Tag */}
-      <div className="flex items-center gap-2 mb-3">
-        <span className="h-px w-6 bg-violet"></span>
-        <span className="font-mono text-xs uppercase tracking-widest text-lilac">About Me</span>
+    <section id="about" className="py-24 px-6 sm:px-12 max-w-6xl mx-auto z-10 relative">
+      {/* Top Pill Badge (Mockup Style) */}
+      <div className="flex justify-center mb-6">
+        <span className="font-mono text-xs uppercase tracking-widest px-4 py-1 rounded-full border border-violet/30 bg-violet/10 text-lilac">
+          About Me
+        </span>
       </div>
-      <h2 className="font-disp font-bold text-3xl sm:text-4xl text-white mb-12">
-        Still curious, <span className="grad-text">already building & shipping.</span>
+
+      {/* Main Big Statement Headline (Mockup Style) */}
+      <h2 className="font-disp font-black text-2xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-white text-center max-w-4xl mx-auto leading-tight mb-20">
+        Python &amp; Distributed Systems Developer Crafting Resilient Backends, Fault-Tolerant Architectures, &amp; Autonomous AI Agents.
       </h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left Column: Avatar & Contact Card */}
-        <div className="lg:col-span-5 glass-card p-6 sm:p-8 rounded-2xl border border-white/10 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-violet/20 rounded-full blur-3xl pointer-events-none" />
+      {/* Circular Avatar Centerpiece Flanked by 4 Large Stats Grid (Mockup Style) */}
+      <div className="relative max-w-3xl mx-auto">
+        {/* Subtle Horizontal Divider Line through center */}
+        <div className="hidden sm:block absolute top-1/2 left-0 right-0 h-px bg-white/10 -translate-y-1/2 z-0" />
 
-          {/* Avatar with Glow Ring */}
-          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 mb-6">
-            <div className="relative group">
-              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border-2 border-lilac/40 p-1 bg-gradient-to-br from-violet/40 to-blue/40 shadow-[0_0_25px_rgba(139,92,246,0.3)]">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 items-center z-10 relative">
+          {/* Left Column Stats */}
+          <div className="space-y-12 text-left sm:text-right pr-0 sm:pr-8">
+            <div>
+              <div className="font-disp font-extrabold text-4xl sm:text-6xl text-white">03+</div>
+              <p className="font-mono text-xs uppercase tracking-wider text-muted mt-1">
+                Datheon Internship Tasks
+              </p>
+            </div>
+            <div>
+              <div className="font-disp font-extrabold text-4xl sm:text-6xl text-lilac">80%</div>
+              <p className="font-mono text-xs uppercase tracking-wider text-muted mt-1">
+                AI Landslide Model Hit-Rate
+              </p>
+            </div>
+          </div>
+
+          {/* Center Column: Circular Avatar with glowing ring & dangling pill (Mockup Style) */}
+          <div className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center my-6 sm:my-0 order-first sm:order-none">
+            <div className="relative">
+              {/* Glowing Radial Ring */}
+              <div className="w-44 h-44 sm:w-48 sm:h-48 rounded-full p-2 bg-gradient-to-tr from-violet via-blue to-lilac shadow-glow-portal relative flex items-center justify-center">
                 <img
                   src={personalInfo.avatarUrl}
                   alt={personalInfo.name}
-                  className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover rounded-full border-2 border-[#0a0815]"
                 />
               </div>
-              <span className="absolute -bottom-1.5 -right-1.5 bg-emerald-500 border-2 border-[#0d0b1a] rounded-full p-1" title="Active & Open to Roles">
-                <span className="block w-2 h-2 rounded-full bg-white animate-pulse" />
-              </span>
-            </div>
 
-            <div className="text-center sm:text-left">
-              <h3 className="font-disp font-bold text-xl text-white">{personalInfo.name}</h3>
-              <p className="font-mono text-xs text-lilac mt-1">Python, Backend & AI Developer</p>
-              <p className="text-xs text-muted/80 mt-1">2nd-Year B.Tech CSE (AKTU)</p>
-
-              <div className="mt-3 flex flex-wrap gap-2 justify-center sm:justify-start">
-                <span className="inline-flex items-center gap-1 font-mono text-[11px] px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 text-muted">
-                  <MapPin className="w-3 h-3 text-lilac" />
-                  {personalInfo.location}
-                </span>
-              </div>
+              {/* Dangling White Pill: DOWNLOAD CV ↓ (Mockup Style) */}
+              <a
+                href={personalInfo.resumeUrl}
+                download="Navjeet_Sinha_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white text-[#0a0815] font-disp font-bold text-[11px] uppercase tracking-wider shadow-xl hover:bg-lilac transition-all hover:scale-105 shrink-0 whitespace-nowrap"
+              >
+                <span>Download CV</span>
+                <Download className="w-3 h-3 text-violet" />
+              </a>
             </div>
           </div>
 
-          {/* Quick Contact Rows */}
-          <div className="pt-4 border-t border-white/10 space-y-2.5 font-mono text-xs text-muted">
-            <div className="flex items-center justify-between">
-              <span className="text-muted/60 flex items-center gap-1.5">
-                <Mail className="w-3.5 h-3.5 text-violet" /> Email
-              </span>
-              <a href={`mailto:${personalInfo.email}`} className="text-white hover:text-lilac transition-colors">
-                {personalInfo.email}
-              </a>
+          {/* Right Column Stats */}
+          <div className="space-y-12 text-left pl-0 sm:pl-8">
+            <div>
+              <div className="flex items-center gap-1 text-amber-400 mb-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-3 h-3 fill-current" />
+                ))}
+              </div>
+              <div className="font-disp font-extrabold text-4xl sm:text-6xl text-white">8.50</div>
+              <p className="font-mono text-xs uppercase tracking-wider text-muted mt-1">
+                College SGPA (AKTU)
+              </p>
             </div>
-            <div className="flex items-center justify-between">
-              <span className="text-muted/60 flex items-center gap-1.5">
-                <Phone className="w-3.5 h-3.5 text-violet" /> Phone
-              </span>
-              <span className="text-white">{personalInfo.phone}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-muted/60 flex items-center gap-1.5">
-                <GraduationCap className="w-3.5 h-3.5 text-violet" /> College
-              </span>
-              <span className="text-white">MGMCET Noida</span>
+            <div>
+              <div className="font-disp font-extrabold text-4xl sm:text-6xl text-blue">R2</div>
+              <p className="font-mono text-xs uppercase tracking-wider text-muted mt-1">
+                Fetch AI-Thon 3.0 Qualified
+              </p>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Right Column: Engineering Journey Narrative & Core Tenets */}
-        <div className="lg:col-span-7 space-y-6 text-muted text-base leading-relaxed">
-          <p>
-            I am a second-year Computer Science student who approaches software not as isolated code snippets, but as <strong className="text-white font-medium">interconnected, resilient systems</strong>. My journey started with core programming fundamentals in <strong className="text-lilac font-medium">C, C++, and Python</strong>, before evolving into enterprise-grade API development and distributed architectures.
+      {/* Engineering Philosophy Narrative */}
+      <div className="mt-24 p-8 rounded-3xl bg-white/[0.02] border border-white/10 max-w-4xl mx-auto text-center sm:text-left grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <h4 className="font-disp font-bold text-base text-white mb-2">Decoupled Backends</h4>
+          <p className="text-xs text-muted leading-relaxed">
+            Stateless FastAPI microservices, Redis Streams worker pools, and sub-50ms WebSocket communication.
           </p>
-
-          <p>
-            During my <strong className="text-white font-medium">Datheon Backend Internship</strong>, I engineered modular FastAPI microservices featuring strict Pydantic data schemas, JWT-based role-based access control, and asynchronous containerized notification workers.
+        </div>
+        <div>
+          <h4 className="font-disp font-bold text-base text-lilac mb-2">Autonomous AI Swarms</h4>
+          <p className="text-xs text-muted leading-relaxed">
+            Decentralized uAgents protocols, dynamic DMM semantic routing, and real-time Agentverse cloud deployments.
           </p>
-
-          <p>
-            In hackathons like <strong className="text-white font-medium">SIH 2026 (NER-Vision Landslide Guardian)</strong> and <strong className="text-white font-medium">Fetch AI-Thon 3.0 (O.M.N.I.S Swarm)</strong>, I have designed ML hazard classification pipelines and autonomous multi-agent networks powered by Fetch.ai uAgents and Agentverse cloud protocols.
+        </div>
+        <div>
+          <h4 className="font-disp font-bold text-base text-blue mb-2">Production Rigor</h4>
+          <p className="text-xs text-muted leading-relaxed">
+            Pydantic schema validation, JWT role-based access control, and deterministic error handling.
           </p>
-
-          {/* Engineering Tenets Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
-            <div className="p-4 rounded-xl glass border border-white/5 hover:border-violet/30 transition-all">
-              <Cpu className="w-5 h-5 text-violet mb-2" />
-              <h4 className="font-disp font-semibold text-sm text-white mb-1">Decoupled Systems</h4>
-              <p className="text-xs text-muted/80">Stateless execution, Redis Streams worker pools, and clean boundaries.</p>
-            </div>
-
-            <div className="p-4 rounded-xl glass border border-white/5 hover:border-blue/30 transition-all">
-              <ShieldCheck className="w-5 h-5 text-blue mb-2" />
-              <h4 className="font-disp font-semibold text-sm text-white mb-1">Defensive Security</h4>
-              <p className="text-xs text-muted/80">Domain-scoped auth, strict Pydantic validations, and fail-safe fallbacks.</p>
-            </div>
-
-            <div className="p-4 rounded-xl glass border border-white/5 hover:border-lilac/30 transition-all">
-              <Palette className="w-5 h-5 text-lilac mb-2" />
-              <h4 className="font-disp font-semibold text-sm text-white mb-1">UI/UX Craft</h4>
-              <p className="text-xs text-muted/80">Graphic design sensibility applied to sleek developer interfaces.</p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
   );
 }
-

@@ -1,68 +1,67 @@
 import React from 'react';
-import { Trophy, Award, CheckCircle2, ExternalLink, Flag, Users } from 'lucide-react';
+import { Trophy, Award, CheckCircle2, ArrowUpRight } from 'lucide-react';
 import { Github } from './Icons';
 import { hackathonsData } from '../data/portfolioData';
 
 export default function Hackathons() {
   return (
-    <section id="hackathons" className="py-24 px-6 max-w-6xl mx-auto z-10 relative">
-      <div className="flex items-center gap-2 mb-3">
-        <span className="h-px w-6 bg-violet"></span>
-        <span className="font-mono text-xs uppercase tracking-widest text-lilac">Competitions &amp; Hackathons</span>
+    <section id="hackathons" className="py-24 px-6 sm:px-12 max-w-6xl mx-auto z-10 relative">
+      {/* Giant Ghost Watermark */}
+      <div className="absolute top-0 left-0 w-full pointer-events-none z-0">
+        <span className="watermark-text text-[13vw] leading-none select-none">
+          HONORS
+        </span>
       </div>
-      <h2 className="font-disp font-bold text-3xl sm:text-4xl text-white mb-6">
-        Verified Hackathons &amp; <span className="grad-text">Honors.</span>
-      </h2>
-      <p className="text-muted text-sm sm:text-base max-w-2xl mb-12">
-        Real hackathon deliverables, team leadership, and competitive benchmarks reported with complete integrity and transparency.
-      </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="flex items-center justify-between gap-4 mb-12 z-10 relative">
+        <div className="flex items-center gap-2">
+          <span className="font-mono text-xs uppercase tracking-widest text-lilac">Competitions</span>
+        </div>
+        <div className="font-disp font-extrabold text-sm uppercase tracking-wider text-muted">
+          Hackathons <span className="text-violet">|</span> Awards
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 z-10 relative">
         {hackathonsData.map((item, index) => (
           <div
             key={index}
-            className="glass-card p-6 sm:p-7 rounded-2xl border border-white/5 hover:border-violet/40 transition-all flex flex-col justify-between"
+            className="rounded-3xl p-7 bg-[#141124]/90 border border-white/10 hover:border-violet/50 transition-all flex flex-col justify-between shadow-xl group"
           >
             <div>
-              {/* Header Badge */}
               <div className="flex items-center justify-between gap-2 mb-4">
-                <span className="p-2 rounded-xl bg-violet/10 border border-violet/20 text-lilac">
-                  <Trophy className="w-4 h-4 text-lilac" />
+                <span className="font-mono text-xs font-bold text-lilac">
+                  0{index + 1}
                 </span>
-                <span className="font-mono text-xs px-2.5 py-1 rounded-full border border-lilac/30 bg-lilac/10 text-lilac font-medium">
+                <span className="font-mono text-xs px-3 py-1 rounded-full bg-white text-[#0a0815] font-bold">
                   {item.badge}
                 </span>
               </div>
 
-              {/* Title & Organization */}
-              <h3 className="font-disp font-bold text-lg text-white mb-1">
+              <h3 className="font-disp font-extrabold text-xl text-white group-hover:text-lilac transition-colors mb-1.5 leading-snug">
                 {item.title}
               </h3>
-              <p className="font-mono text-xs text-lilac/80 flex items-center gap-1.5 mb-2">
-                <Users className="w-3.5 h-3.5 text-violet" />
+              <p className="font-mono text-xs text-lilac/80 mb-1">
                 {item.role}
               </p>
               <p className="text-xs text-muted/70 mb-4 pb-3 border-b border-white/5">
                 {item.organization}
               </p>
 
-              {/* Problem Statement Note */}
-              <div className="mb-4 p-2.5 rounded-lg bg-white/[0.02] border border-white/5 text-[11px] font-mono text-muted/90">
+              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 text-[11px] font-mono text-muted mb-4">
                 <span className="text-violet font-semibold">Scope: </span>
                 {item.problemStatement}
               </div>
 
-              {/* Description */}
               <p className="text-xs text-muted leading-relaxed mb-6">
                 {item.description}
               </p>
             </div>
 
-            {/* Verified Footer */}
-            <div className="pt-4 border-t border-white/5 flex items-center justify-between">
+            <div className="pt-4 border-t border-white/10 flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-emerald-400">
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>{item.verifiedStatus}</span>
+                <span>Verified</span>
               </span>
 
               {item.github && (
@@ -70,10 +69,10 @@ export default function Hackathons() {
                   href={item.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-1.5 rounded-lg text-muted hover:text-white glass hover:border-violet/40 transition-colors"
+                  className="p-2 rounded-full bg-white/5 border border-white/15 text-muted hover:text-white hover:border-violet transition-colors"
                   aria-label="View Project Code"
                 >
-                  <Github className="w-4 h-4" />
+                  <Github className="w-3.5 h-3.5" />
                 </a>
               )}
             </div>

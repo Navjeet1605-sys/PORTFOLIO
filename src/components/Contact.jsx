@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Download, Copy, Check, Send, Sparkles, MapPin, Phone } from 'lucide-react';
+import { Mail, ArrowUpRight, Copy, Check, Download, MapPin, Send } from 'lucide-react';
 import { Github, Linkedin } from './Icons';
 import { personalInfo } from '../data/portfolioData';
 
@@ -13,38 +13,46 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 px-6 max-w-5xl mx-auto z-10 relative">
-      <div className="glass-card p-8 sm:p-14 rounded-3xl border border-white/10 text-center relative overflow-hidden shadow-2xl">
-        {/* Glow Halo */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-violet/20 rounded-full blur-3xl pointer-events-none" />
+    <section id="contact" className="py-24 px-6 sm:px-12 max-w-6xl mx-auto z-10 relative">
+      {/* Giant Ghost Watermark */}
+      <div className="absolute top-0 left-0 w-full pointer-events-none z-0">
+        <span className="watermark-text text-[14vw] leading-none select-none">
+          CONNECT
+        </span>
+      </div>
 
-        <div className="relative z-10 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-violet/30 bg-violet/10 text-lilac font-mono text-xs mb-6">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Let's collaborate &amp; ship</span>
-          </div>
+      <div className="rounded-3xl bg-gradient-to-br from-[#1c1438] via-[#120e24] to-[#0a0815] border border-violet/30 p-8 sm:p-16 shadow-2xl relative overflow-hidden z-10">
+        {/* Glow */}
+        <div className="absolute -top-20 -right-20 w-96 h-96 bg-violet/25 rounded-full blur-3xl pointer-events-none" />
 
-          <h2 className="font-disp font-extrabold text-3xl sm:text-5xl text-white mb-6 tracking-tight leading-tight">
-            Ready to build something <span className="grad-text">worth shipping.</span>
+        <div className="max-w-3xl">
+          <span className="font-mono text-xs uppercase tracking-widest text-lilac block mb-4">
+            Available For Roles &amp; Projects
+          </span>
+
+          <h2 className="font-disp font-black text-3xl sm:text-6xl uppercase tracking-tight text-white mb-6 leading-tight">
+            Let's build something <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet via-lilac to-blue">
+              worth shipping.
+            </span>
           </h2>
 
-          <p className="text-muted text-sm sm:text-base leading-relaxed mb-10">
-            Open to software engineering internships, Python backend roles, and AI agent collaborations. Reach out directly or connect on LinkedIn.
+          <p className="text-muted text-base sm:text-lg leading-relaxed max-w-xl mb-10">
+            Open to Python backend engineering internships, distributed systems projects, and autonomous AI collaborations. Reach out directly.
           </p>
 
-          {/* Quick Action Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-4 mb-10">
+          <div className="flex flex-wrap items-center gap-4 mb-12">
             <a
               href={`mailto:${personalInfo.email}`}
-              className="flex items-center gap-2 px-6 py-3.5 rounded-xl font-medium text-sm bg-gradient-to-r from-violet to-blue text-white shadow-lg hover:shadow-violet/40 hover:scale-[1.03] active:scale-[0.98] transition-all"
+              className="flex items-center gap-2 px-8 py-4 rounded-full bg-white text-[#0a0815] font-disp font-bold text-sm hover:bg-lilac transition-all hover:scale-105 shadow-xl shadow-white/10"
             >
-              <Send className="w-4 h-4" />
               <span>Email Me Directly</span>
+              <ArrowUpRight className="w-4 h-4" />
             </a>
 
             <button
               onClick={copyEmail}
-              className="flex items-center gap-2 px-5 py-3.5 rounded-xl font-mono text-xs glass text-white hover:border-lilac transition-all"
+              className="flex items-center gap-2 px-6 py-4 rounded-full border border-white/20 bg-white/[0.04] text-white font-mono text-xs hover:border-violet transition-all"
             >
               {copied ? (
                 <>
@@ -64,36 +72,33 @@ export default function Contact() {
               download="Navjeet_Sinha_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-3.5 rounded-xl font-mono text-xs glass text-white hover:border-lilac transition-all"
+              className="flex items-center gap-2 px-6 py-4 rounded-full border border-white/20 bg-white/[0.04] text-white font-disp font-semibold text-xs hover:border-violet transition-all"
             >
               <Download className="w-4 h-4 text-lilac" />
-              <span>Download Resume</span>
+              <span>Download CV</span>
             </a>
           </div>
 
-          {/* Social Profiles & Details */}
-          <div className="pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs font-mono text-muted">
+          <div className="pt-8 border-t border-white/10 flex flex-wrap items-center gap-8 text-xs font-mono text-muted">
             <a
               href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-muted hover:text-white transition-colors"
+              className="flex items-center gap-2 hover:text-white transition-colors"
             >
               <Linkedin className="w-4 h-4 text-violet" />
               <span>LinkedIn Profile</span>
             </a>
-
             <a
               href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-muted hover:text-white transition-colors"
+              className="flex items-center gap-2 hover:text-white transition-colors"
             >
               <Github className="w-4 h-4 text-violet" />
               <span>GitHub Repositories</span>
             </a>
-
-            <div className="flex items-center gap-2 text-muted">
+            <div className="flex items-center gap-2">
               <MapPin className="w-4 h-4 text-violet" />
               <span>{personalInfo.location}</span>
             </div>

@@ -1,109 +1,141 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowRight, Download, Terminal, Sparkles, MapPin, CheckCircle2 } from 'lucide-react';
-import { Github, Linkedin } from './Icons';
+import React from 'react';
+import { ArrowUpRight, Download, ArrowDownRight, Sparkles, Mail, Terminal, Send } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 
 export default function Hero() {
-  const [roleIndex, setRoleIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % personalInfo.subRoles.length);
-    }, 2800);
-    return () => clearInterval(timer);
-  }, []);
-
   return (
-    <section className="relative min-h-[92vh] flex flex-col justify-center items-center px-6 pt-32 pb-16 z-10 text-center">
-      {/* Top Engineering Badge */}
-      <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-violet/30 bg-violet/10 backdrop-blur-md mb-8 animate-float-slow shadow-[0_0_20px_rgba(139,92,246,0.15)]">
-        <Sparkles className="w-3.5 h-3.5 text-lilac" />
-        <span className="font-mono text-xs text-lilac tracking-wide">
-          Available for Python, Backend & AI Engineering Roles
+    <section className="relative min-h-screen pt-28 pb-16 px-6 sm:px-12 flex flex-col justify-center overflow-hidden">
+      {/* Giant Background Watermark Text (Mockup Style: "DEVELOPER") */}
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-full text-center pointer-events-none z-0">
+        <span className="watermark-text text-[15vw] leading-none select-none">
+          DEVELOPER
         </span>
       </div>
 
-      {/* Main Hero Headline */}
-      <h1 className="font-disp font-extrabold text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight max-w-5xl leading-[1.08] mb-6">
-        Building high-impact systems at the edge of{' '}
-        <span className="grad-text">code, AI & backend.</span>
-      </h1>
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10 relative">
+        {/* Left Headline Column */}
+        <div className="lg:col-span-6 flex flex-col justify-center text-left order-2 lg:order-1">
+          <div className="inline-flex items-center gap-2 mb-4 font-mono text-xs uppercase tracking-widest text-lilac">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span>Hi, 👨‍💻 I'm Navjeet Sinha</span>
+          </div>
 
-      {/* Dynamic Sub-Role Switcher */}
-      <div className="flex items-center justify-center gap-2 mb-6 font-mono text-base sm:text-lg text-muted">
-        <Terminal className="w-4 h-4 text-violet" />
-        <span>Specializing in</span>
-        <span className="font-semibold text-lilac border-b border-lilac/40 pb-0.5 min-w-[200px] text-left">
-          {personalInfo.subRoles[roleIndex]}
-        </span>
-      </div>
+          <h1 className="font-disp font-extrabold text-4xl sm:text-6xl xl:text-7xl uppercase tracking-tight text-white leading-[1.04] mb-6">
+            Python, <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet via-lilac to-blue">
+              Backend Architect
+            </span> <br />
+            &amp; AI Systems.
+          </h1>
 
-      {/* Concise Bio */}
-      <p className="max-w-2xl text-muted text-base sm:text-lg leading-relaxed mb-10 font-body">
-        Hi, I'm <strong className="text-white font-semibold">Navjeet Sinha</strong> — 2nd-year B.Tech CSE student at MGMCET Noida. I build production-grade FastAPI microservices, distributed DAG workflow engines, and autonomous multi-agent cognitive swarms.
-      </p>
+          <p className="text-muted text-base sm:text-lg leading-relaxed max-w-lg mb-8 font-body">
+            Engineering high-throughput FastAPI microservices, fault-tolerant distributed DAG workflows with Redis Streams, and autonomous multi-agent cognitive swarms.
+          </p>
 
-      {/* Call to Actions */}
-      <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
-        <a
-          href="#projects"
-          className="flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-medium text-sm bg-gradient-to-r from-violet to-blue text-white shadow-lg hover:shadow-violet/40 hover:scale-[1.03] active:scale-[0.98] transition-all"
-        >
-          <span>Explore Projects</span>
-          <ArrowRight className="w-4 h-4" />
-        </a>
+          {/* Action CTAs */}
+          <div className="flex flex-wrap items-center gap-4">
+            <a
+              href="#portfolio"
+              className="flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-[#0a0815] font-disp font-bold text-sm hover:bg-lilac transition-all hover:scale-105 shadow-lg shadow-white/10"
+            >
+              <span>Explore Projects</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
 
-        <a
-          href={personalInfo.resumeUrl}
-          download="Navjeet_Sinha_Resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-medium text-sm glass text-white hover:border-lilac hover:bg-white/[0.08] hover:scale-[1.03] active:scale-[0.98] transition-all"
-        >
-          <Download className="w-4 h-4 text-lilac" />
-          <span>Download Resume</span>
-        </a>
+            <a
+              href={personalInfo.resumeUrl}
+              download="Navjeet_Sinha_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/20 bg-white/[0.04] text-white font-disp font-semibold text-sm hover:border-violet hover:bg-violet/10 transition-all hover:scale-105"
+            >
+              <span>Download CV</span>
+              <Download className="w-4 h-4 text-lilac" />
+            </a>
+          </div>
 
-        <div className="flex items-center gap-2 pl-2">
-          <a
-            href={personalInfo.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            className="p-3.5 rounded-xl glass text-muted hover:text-white hover:border-violet/50 transition-all hover:scale-105"
-          >
-            <Github className="w-4 h-4" />
-          </a>
-          <a
-            href={personalInfo.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="p-3.5 rounded-xl glass text-muted hover:text-white hover:border-violet/50 transition-all hover:scale-105"
-          >
-            <Linkedin className="w-4 h-4" />
-          </a>
-        </div>
-      </div>
-
-      {/* Quick Verified Impact Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-4xl">
-        {personalInfo.stats.map((stat, idx) => (
-          <div
-            key={idx}
-            className="glass-card p-4 rounded-xl text-left border border-white/5 hover:border-violet/30 transition-all group"
-          >
-            <div className="font-disp font-bold text-2xl sm:text-3xl text-white group-hover:text-lilac transition-colors mb-1">
-              {stat.value}
+          {/* Quick Metrics Bar Under Headline */}
+          <div className="mt-12 pt-6 border-t border-white/10 grid grid-cols-3 gap-4 max-w-md">
+            <div>
+              <div className="font-disp font-extrabold text-2xl sm:text-3xl text-white">03+</div>
+              <div className="font-mono text-[11px] text-muted uppercase">Internship Tasks</div>
             </div>
-            <div className="font-mono text-xs text-lilac/90 font-medium mb-0.5">
-              {stat.label}
+            <div>
+              <div className="font-disp font-extrabold text-2xl sm:text-3xl text-lilac">80%</div>
+              <div className="font-mono text-[11px] text-muted uppercase">AI Model Accuracy</div>
             </div>
-            <div className="text-[11px] text-muted/70 truncate">
-              {stat.detail}
+            <div>
+              <div className="font-disp font-extrabold text-2xl sm:text-3xl text-blue">8.50</div>
+              <div className="font-mono text-[11px] text-muted uppercase">First Sem SGPA</div>
             </div>
           </div>
-        ))}
+        </div>
+
+        {/* Right Hero Arch Portal (Mockup Style with glowing sun and signature) */}
+        <div className="lg:col-span-6 flex justify-center items-center order-1 lg:order-2 relative">
+          <div className="relative w-full max-w-[360px] sm:max-w-[420px]">
+            {/* The Signature Arch Frame */}
+            <div className="hero-arch-frame aspect-[4/5] w-full border border-violet/40 shadow-glow-portal relative flex items-end justify-center">
+              {/* Glowing Purple-Blue Radial Sun */}
+              <div className="hero-arch-sun" />
+
+              {/* Floating Pill Badges (Mockup Style) */}
+              <div className="absolute top-12 left-4 z-20 px-3.5 py-1 rounded-full bg-[#0a0815]/80 backdrop-blur-md border border-white/15 text-white font-disp text-xs font-semibold -rotate-6 shadow-lg">
+                Backend Architect
+              </div>
+
+              <div className="absolute top-28 right-4 z-20 px-3.5 py-1 rounded-full bg-[#0a0815]/80 backdrop-blur-md border border-violet/50 text-lilac font-disp text-xs font-semibold rotate-6 shadow-lg">
+                FastAPI &amp; uAgents
+              </div>
+
+              <div className="absolute bottom-28 left-4 z-20 px-3.5 py-1 rounded-full bg-[#0a0815]/80 backdrop-blur-md border border-blue/40 text-blue font-disp text-xs font-semibold -rotate-3 shadow-lg">
+                AI / ML Systems
+              </div>
+
+              {/* Navjeet's Portrait Image */}
+              <img
+                src={personalInfo.avatarUrl}
+                alt={personalInfo.name}
+                className="relative z-10 w-full h-[88%] object-cover object-top mask-image-gradient filter contrast-105"
+                style={{
+                  maskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
+                  WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)'
+                }}
+              />
+
+              {/* Cursive Handwriting Signature Overlay (Mockup Style: "Navjeet Sinha") */}
+              <div className="absolute bottom-12 z-20 w-full text-center pointer-events-none transform -rotate-3">
+                <span className="font-signature font-bold text-5xl sm:text-6xl text-lilac drop-shadow-[0_0_15px_rgba(139,92,246,0.9)] tracking-wide">
+                  Navjeet Sinha
+                </span>
+              </div>
+            </div>
+
+            {/* Floating White Editorial Card (Mockup Style: Bottom Right) */}
+            <div className="absolute -bottom-8 -right-4 sm:-right-8 z-30 max-w-[280px] p-5 rounded-2xl bg-white text-[#0a0815] shadow-2xl border border-white/20 transform hover:-translate-y-1 transition-transform">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="font-disp font-bold text-xs sm:text-sm leading-snug">
+                    2nd-Year B.Tech CSE (AKTU) &amp; Systems Engineer in Delhi NCR, India.
+                  </p>
+                  <a
+                    href={`mailto:${personalInfo.email}`}
+                    className="inline-flex items-center gap-1 font-mono text-[11px] font-semibold text-violet hover:underline mt-2.5"
+                  >
+                    <span>{personalInfo.email}</span>
+                  </a>
+                </div>
+
+                {/* Spinning Round Badge Stamp */}
+                <div className="relative w-12 h-12 shrink-0">
+                  <div className="absolute inset-0 rounded-full bg-[#0a0815] text-white flex items-center justify-center shadow-md">
+                    <ArrowDownRight className="w-5 h-5 text-lilac transform -rotate-45" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
