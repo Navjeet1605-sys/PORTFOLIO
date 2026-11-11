@@ -510,3 +510,261 @@ document.getElementById('githubLink').addEventListener('click', function (e) {
     }, 200);
   }
 })();
+
+
+// ==========================================================================
+// UPGRADED INTERACTIONS: Filters, Modals, Clipboard, Mobile Nav, ScrollSpy
+// ==========================================================================
+
+// ---------- Project Category Filtering ----------
+(function initProjectFilters() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projCards = document.querySelectorAll('.proj-showcase-card');
+
+  if (!filterBtns.length) return;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterValue = btn.getAttribute('data-filter');
+
+      projCards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category') || '';
+        if (filterValue === 'all' || cardCategory.includes(filterValue)) {
+          card.style.display = 'flex';
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 10);
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(15px)';
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 250);
+        }
+      });
+    });
+  });
+})();
+
+// ---------- Interactive Project Detail Modal ----------
+const projectModalData = {
+  'ner-vision': {
+    title: 'NER-Vision — AI Landslide Guardian',
+    badge: 'SIH 2026 Problem Statement 26001 · Ministry of DoNER',
+    tagline: 'AI-Powered Landslide Risk Monitoring, Dynamic Evacuation Routing & Real-Time Early Warning System.',
+    problem: 'The North Eastern Region (NER) of India suffers catastrophic landslides during monsoons due to steep terrain, heavy precipitation, and fragile soil. Conventional monitoring systems are delayed, manual, and lack localized evacuation navigation.',
+    solution: 'Engineered a full-stack early warning platform trained on real physical parameters (rainfall, soil moisture, slope angles, vegetation index, and historical incidence). Achieved an 80% backtest hit-rate across 10 benchmark landslide scenarios, meeting official SIH acceptance criteria.',
+    architecture: '• Machine Learning Engine: Scikit-learn RandomForestClassifier with offline threshold fallback logic.<br>• GIS Heatmap Dashboard: Interactive Leaflet.js map with color/size-coded risk markers auto-refreshing every 8s.<br>• Dynamic Evacuation Routing: NetworkX graph running Dijkstra algorithm with risk-penalized edge weights to navigate citizens safely around high-risk zones.<br>• Automated Real-time Alerting: Simulated SMS/WhatsApp/Push notification dispatcher triggering when risk crosses High/Very High thresholds.<br>• Crowdsourced Reporting: Geo-tagged citizen hazard reports with automatic verification of high-severity incidents.',
+    tech: ['Python', 'Flask', 'Scikit-learn', 'Leaflet.js', 'NetworkX', 'SQLite', 'GIS Mapping', 'Dijkstra Routing'],
+    github: 'https://github.com/Navjeet1605-sys/SIH-PS-26001',
+    demo: null
+  },
+  'omnis': {
+    title: 'O.M.N.I.S — Omni-Modal Network Intelligence Swarm',
+    badge: 'Fetch AI-Thon 3.0 · Round 2 Finalist at Galgotias CET',
+    tagline: 'Decentralized Autonomous Multi-Agent Swarm with Semantic Decision Routing & Agent Chat Protocol.',
+    problem: 'Personal AI assistants are traditionally monolithic chat wrappers that cannot execute verified multi-step actions or interact with decentralized agent ecosystems.',
+    solution: 'Built an autonomous multi-agent swarm natively integrated into the Fetch.ai Ecosystem and discoverable across ASI:One. Elevated voice/text intent into real-time verified execution using a semantic Decision-Making Model (DMM) router.',
+    architecture: '• Multi-Agent Supervisor: Semantic FirstLayerDMM classifies incoming intent and delegates queries to specialized autonomous sub-agents.<br>• Crypto & Finance Agent: Real-time Binance spot ticker and CoinGecko API integrations with live USD/INR pricing.<br>• Web Search & Fact Synthesis Agent: Real-time Wikipedia entity extraction and DuckDuckGo search integration with Groq LLaMA 3.3 70B reasoning.<br>• Agent Chat Protocol (ACP): Full support for official Fetch.ai ACP specifications with interactive MetadataContent rich cards and persistent conversational memory (ctx.storage).<br>• Agentverse Cloud Deployment: Live cloud-native uAgent registered on the Almanac smart contract.',
+    tech: ['Fetch.ai uAgents', 'Agentverse', 'ASI:One', 'Python', 'Groq LLaMA 3.3', 'Agent Chat Protocol', 'Binance API', 'DuckDuckGo'],
+    github: 'https://github.com/Navjeet1605-sys/fetch-a-thon',
+    demo: 'https://agentverse.ai/'
+  },
+  'devflow': {
+    title: 'DevFlow — Distributed DAG Workflow Engine & CI/CD',
+    badge: 'Distributed Systems & Microservices',
+    tagline: 'High-Throughput, Fault-Tolerant Distributed DAG Pipeline Engine with Real-Time Log Streaming & AI Failure Diagnostics.',
+    problem: 'Modern CI/CD pipelines require robust dependency management, resilient worker crash recovery, and instant diagnostics when pipeline stages fail.',
+    solution: 'Architected a distributed DAG workflow engine utilizing Tarjan\'s cycle detection, BullMQ redis queues, PostgreSQL, and an AI-driven log analyzer that isolates root causes and outputs automated remediation recommendations.',
+    architecture: '• DAG Graph Engine: Tarjan\'s algorithm for cycle hazard prevention and topological task sorting.<br>• Worker Runtime Cluster: Specialized worker pools (build-worker, test-worker, docker-worker, deploy-worker, script-worker) with automated Bearer/API-key secret redaction.<br>• Liveness Monitor & Fault Recovery: Heartbeat monitor detecting dead workers (15s inactivity) and automatically re-enqueueing orphaned tasks.<br>• WebSocket Streaming Gateway: Room-based real-time log distribution for live pipeline inspection.<br>• AI Root Cause Analyzer: Event bus consumer parsing failure logs to deliver instant diagnostic summaries.',
+    tech: ['Node.js', 'TypeScript', 'Express', 'BullMQ', 'Redis Streams', 'PostgreSQL', 'React Flow', 'Docker Compose'],
+    github: 'https://github.com/Navjeet1605-sys/DevFlow',
+    demo: 'https://docs-devflow.vercel.app/'
+  },
+  'datheon': {
+    title: 'Datheon Backend Suite — BookStore API, Auth & Microservices',
+    badge: 'Datheon AI Systems Internship · Grade A+ (8.7/10)',
+    tagline: 'Production-Grade Asynchronous FastAPI Backend Suite, JWT/RBAC Security & Containerized Microservice.',
+    problem: 'Synchronous backend frameworks struggle with latency and concurrent I/O under microservice architectures, demanding robust asynchronous patterns and strict security boundaries.',
+    solution: 'Designed and implemented three production backend milestones evaluated by Datheon\'s Academic & Talent Directorate, earning an A+ Distinction for architectural cleanliness and test coverage.',
+    architecture: '• Task 1 — BookStore REST API: Asynchronous CRUD endpoints powered by FastAPI and Pydantic v2 schemas, strict type enforcement, query-level filters (author, genre, max_price), and Swagger documentation.<br>• Task 2 — JWT Authentication & RBAC: Passwords securely hashed with bcrypt; role guards protecting sensitive endpoints (/me, /protected, /admin/users); cryptographic JWT validation with 30-min expirations.<br>• Task 3/4 — Notification Microservice: Non-blocking asynchronous email processing using FastAPI BackgroundTasks, job state monitoring (queued, sending, sent, failed), client-IP rate limiting (slowapi, 5 req/min, HTTP 429), and multi-stage Docker containerization.',
+    tech: ['FastAPI', 'Python 3.10+', 'Pydantic v2', 'JWT', 'bcrypt', 'slowapi', 'Docker', 'BackgroundTasks', 'Swagger/OpenAPI'],
+    github: 'https://github.com/Navjeet1605-sys/Datheon_Python_-_FastAPI_Backend_Development_Internship',
+    demo: null
+  },
+  'campus-finder': {
+    title: 'CampusFinder — College Lost & Found Portal',
+    badge: 'Full-Stack Campus Utility · Live Deployment',
+    tagline: 'Real-Time College Lost & Found Portal with Domain-Locked Authentication & Direct Ownership Verification.',
+    problem: 'College students frequently misplace items across campus, while existing notice boards and WhatsApp groups have poor reach, no verification, and lack organized search.',
+    solution: 'Engineered a modern web portal for MGM College of Engineering and Technology students, requiring official @coet.in credentials and offering secret verification hints before item handover.',
+    architecture: '• Front-End: Modern React 19 single-page app built with TypeScript, Vite, and Tailwind CSS.<br>• Database & Storage: Supabase PostgreSQL database with row-level security and image storage bucket.<br>• Institutional Gatekeeping: Restricted email registration strictly to @coet.in domains with 10-digit mobile verification.<br>• Verification System: Secret verification hints and direct student-to-student messaging to prove item ownership before physical exchange.',
+    tech: ['React 19', 'TypeScript', 'Vite', 'Supabase', 'PostgreSQL', 'Tailwind CSS', 'Row Level Security'],
+    github: 'https://github.com/Navjeet1605-sys/Campus-Finder',
+    demo: null
+  },
+  'library-assistant': {
+    title: 'Smart Library Assistant & Conversational Engine',
+    badge: 'Conversational AI & Search',
+    tagline: 'Natural Language Book Recommendation, Inventory Querying & Catalog Navigation System.',
+    problem: 'Traditional library catalog databases require rigid keyword queries, making exploratory book search frustrating for students.',
+    solution: 'Developed an intelligent assistant in Python that interprets conversational intent, extracts subject keywords, and queries library catalog databases with contextual suggestions.',
+    architecture: '• NLP Parsing Pipeline: Tokenization and entity extraction to capture title, author, and thematic topics.<br>• Database Layer: SQLite indexing supporting fast full-text querying and category lookups.<br>• Recommendation Logic: Contextual similarity scoring suggesting related academic texts and papers.',
+    tech: ['Python', 'NLP', 'SQLite', 'Flask', 'Prompt Engineering'],
+    github: 'https://github.com/Navjeet1605-sys',
+    demo: null
+  }
+};
+
+window.openProjectModal = function(projectId) {
+  const data = projectModalData[projectId];
+  if (!data) return;
+
+  const overlay = document.getElementById('projectModalOverlay');
+  const modalContent = document.getElementById('projectModalBody');
+  if (!overlay || !modalContent) return;
+
+  modalContent.innerHTML = `
+    <span class="modal-badge">${data.badge}</span>
+    <h3 class="modal-title">${data.title}</h3>
+    <p style="color: var(--lilac); font-family: var(--mono); font-size: 0.85rem; margin-top: 4px;">${data.tagline}</p>
+    
+    <div class="modal-body">
+      <div class="modal-sec-box">
+        <h4>⚡ The Problem & Context</h4>
+        <p>${data.problem}</p>
+      </div>
+
+      <div class="modal-sec-box">
+        <h4>💡 Solution & My Engineering Contribution</h4>
+        <p>${data.solution}</p>
+      </div>
+
+      <div class="modal-sec-box">
+        <h4>🏛️ System Architecture & Key Capabilities</h4>
+        <div style="line-height: 1.7;">${data.architecture}</div>
+      </div>
+
+      <div class="modal-sec-box">
+        <h4>🛠️ Technologies & Tools Applied</h4>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+          ${data.tech.map(t => `<span class="skill-chip primary-tech">${t}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      ${data.github ? `<a href="${data.github}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">View on GitHub ↗</a>` : ''}
+      ${data.demo ? `<a href="${data.demo}" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo / Docs ↗</a>` : ''}
+      <button onclick="closeProjectModal()" class="btn btn-ghost btn-sm" style="margin-left: auto;">Close Window</button>
+    </div>
+  `;
+
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+};
+
+window.closeProjectModal = function() {
+  const overlay = document.getElementById('projectModalOverlay');
+  if (overlay) {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+};
+
+// Modal escape and backdrop listeners
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') window.closeProjectModal();
+});
+const modalOverlay = document.getElementById('projectModalOverlay');
+if (modalOverlay) {
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) window.closeProjectModal();
+  });
+}
+
+// ---------- Copy Email to Clipboard with Toast ----------
+window.copyEmailToClipboard = function() {
+  const email = 'getjeet16@gmail.com';
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(email).then(showToast);
+  } else {
+    // Fallback
+    const input = document.createElement('input');
+    input.value = email;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
+    showToast();
+  }
+
+  function showToast() {
+    let toast = document.getElementById('copyToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'copyToast';
+      toast.className = 'toast-notice';
+      toast.innerHTML = '<span>📋</span> <strong>Email copied:</strong> getjeet16@gmail.com';
+      document.body.appendChild(toast);
+    }
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3200);
+  }
+};
+
+// ---------- Mobile Navigation Toggle ----------
+(function initMobileNav() {
+  const toggleBtn = document.getElementById('mobileNavToggle');
+  const navLinks = document.querySelector('.navlinks');
+
+  if (toggleBtn && navLinks) {
+    toggleBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      const isExpanded = navLinks.classList.contains('active');
+      toggleBtn.setAttribute('aria-expanded', isExpanded);
+      toggleBtn.textContent = isExpanded ? '✕' : '☰';
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        toggleBtn.textContent = '☰';
+      });
+    });
+  }
+})();
+
+// ---------- Dynamic ScrollSpy Navigation ----------
+(function initScrollSpy() {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.navlinks a[href^="#"]');
+
+  if (!sections.length || !navLinks.length) return;
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    const scrollY = window.pageYOffset;
+
+    sections.forEach(sec => {
+      const secTop = sec.offsetTop - 140;
+      const secHeight = sec.offsetHeight;
+      if (scrollY >= secTop && scrollY < secTop + secHeight) {
+        current = sec.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  }, { passive: true });
+})();
